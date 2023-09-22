@@ -101,6 +101,8 @@ internal class Midi1Writer(
     private fun get7BitEncodedLength(value: Int): Int {
         if (value < 0)
             throw IllegalArgumentException("Length must be non-negative integer: $value")
+        else if (value > 0x0FFFFFFF)
+            throw IllegalArgumentException("Length is too large: $value")
         if (value == 0)
             return 1
         var ret = 0
